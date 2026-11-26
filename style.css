@@ -1,0 +1,216 @@
+:root {
+  color-scheme: light;
+  font-family: system-ui, sans-serif;
+  color: #332e29;
+  background: #f7f3eb;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+.piano {
+  width: min(960px, calc(100% - clamp(24px, 8vw, 80px)));
+  margin-inline: auto;
+  padding-block: clamp(36px, 13vh, 124px) 36px;
+}
+
+h1 {
+  margin: 0 0 12px;
+  font-size: clamp(1.65rem, 4vw, 2.35rem);
+  font-weight: 550;
+  letter-spacing: .04em;
+  line-height: 1.3;
+}
+
+.intro,
+.key-guide {
+  color: #62584f;
+  line-height: 1.65;
+}
+
+.intro {
+  margin: 0;
+  font-size: .9rem;
+}
+
+.key-guide {
+  margin: 4px 0 0;
+  font-size: .76rem;
+}
+
+.playback {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  margin-block: clamp(22px, 5vw, 38px) 13px;
+}
+
+#play-toggle {
+  min-width: 7rem;
+  min-height: 42px;
+  padding: 8px 14px;
+  border: 0;
+  border-radius: 7px;
+  color: #fffaf1;
+  background: #86432f;
+  font: inherit;
+  font-size: .9rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+@media (hover: hover) {
+  #play-toggle:hover {
+    background: #713726;
+  }
+}
+
+.song-title {
+  color: #62584f;
+  font-size: .8rem;
+}
+
+#keyboard {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  grid-template-columns: repeat(15, minmax(0, 1fr));
+  height: clamp(150px, 29vw, 294px);
+  border-top: 5px solid #302924;
+  border-radius: 7px 7px 6px 6px;
+  background: #302924;
+  box-shadow: 0 6px 16px #33251c26;
+  touch-action: none;
+  user-select: none;
+}
+
+.piano-key {
+  --press-offset: 0px;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  cursor: pointer;
+  touch-action: none;
+}
+
+.piano-key-face {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  height: 100%;
+  padding: 0 0 clamp(7px, 2vw, 17px);
+  border: 1px solid #574b41;
+  border-top: 0;
+  border-radius: 0 0 5px 5px;
+  color: #766b60;
+  background: #fffdf7;
+  box-shadow: inset 0 -5px #e1d7c9;
+  font-size: clamp(.56rem, 1.35vw, .71rem);
+  line-height: 1;
+  transform: translateY(var(--press-offset));
+  transition: background-color 90ms, box-shadow 90ms, transform 90ms;
+  pointer-events: none;
+}
+
+.piano-key--black {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: calc(var(--boundary) * 100% / 15);
+  width: 4.15%;
+  height: 60%;
+  transform: translateX(-50%);
+}
+
+.piano-key--black .piano-key-face {
+  padding-bottom: clamp(6px, 1.5vw, 13px);
+  border-color: #29231f;
+  color: #c5b9aa;
+  background: #39322d;
+  box-shadow: inset 0 -5px #27211e, 0 3px 4px #1c141455;
+}
+
+.piano-key.is-active {
+  --press-offset: 2px;
+}
+
+.piano-key.is-active .piano-key-face {
+  color: #543421;
+  background: #efad7b;
+  box-shadow: inset 0 -2px #bd754c;
+}
+
+.piano-key--black.is-active .piano-key-face {
+  color: #fff7ed;
+  background: #a95138;
+  box-shadow: inset 0 -2px #753725, 0 1px 2px #1c141455;
+}
+
+#play-toggle:focus-visible,
+.piano-key:focus-visible {
+  outline: 2px solid #a84f31;
+  outline-offset: 3px;
+}
+
+.piano-key:focus-visible {
+  outline-color: #883b26;
+  outline-offset: -3px;
+}
+
+.piano-key--black:focus-visible {
+  outline-color: #ffd8ba;
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .key-guide {
+    display: none;
+  }
+
+  .piano-key-face {
+    font-size: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .piano-key--black {
+    width: 4.5%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .piano-key-face {
+    transform: none;
+    transition: none;
+  }
+}
+
+@media (max-height: 480px) and (orientation: landscape) {
+  .piano {
+    padding-block: 16px;
+  }
+
+  h1 {
+    margin-bottom: 4px;
+    font-size: 1.4rem;
+  }
+
+  .key-guide {
+    display: none;
+  }
+
+  .playback {
+    margin-block: 10px 8px;
+  }
+
+  #keyboard {
+    height: min(clamp(150px, 29vw, 294px), 52vh);
+  }
+}

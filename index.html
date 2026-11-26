@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>小さなピアノ</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <main class="piano">
+    <h1>小さなピアノ</h1>
+    <p class="intro">鍵盤をタップ・クリックするか、PC のキーボードで弾いてください。強弱は自動でつきます。</p>
+    <p class="key-guide">PC のキーボードでは Z〜M が C4〜B4、Q〜I が C5〜C6 です（黒鍵はひとつ上の段）。</p>
+
+    <div class="playback">
+      <button id="play-toggle" type="button">曲を流す</button>
+      <span class="song-title">小さなワルツ（オリジナル）</span>
+    </div>
+
+    <div id="keyboard" role="group" aria-label="ピアノ鍵盤"></div>
+  </main>
+</body>
+</html>
